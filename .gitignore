@@ -1,0 +1,6 @@
+**/.DS_Store
+build/
+tests/timing
+._*
+*.swp
+.pirun.*

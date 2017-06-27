@@ -45,7 +45,7 @@ wait for the given amount of time (in microseconds). Wait time should not exceed
 1000000us (i.e. 1second).
 
 #### `int scheduleIn(int milliseconds, void (*callback)(void))` ####
-call a function after the given time (+/-10ms precision), starting when
+call a function after the given time, starting when
 scheduleIn is called.
 
 * milliseconds : the time to wait before calling the function in milliseconds

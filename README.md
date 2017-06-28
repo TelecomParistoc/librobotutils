@@ -62,3 +62,56 @@ unscheduled a previously scheduled function (stop it from being called)
 the pending tasks
 
 ### I2C functions ###
+
+These function allow to read and write I2C slaves, in a more flexible way than
+wiringPi base functions.
+
+#### `int8_t I2Cread8(uint8_t addr, uint8_t reg)` ####
+Read a 8 bit register of an I2C slave.
+
+* addr : slave address
+* reg : register address
+
+**returns :** register value
+
+#### `int I2Cwrite8(uint8_t addr, uint8_t reg, uint8_t value)` ####
+Write a 8 bit register of an I2C slave.
+
+* addr : slave address
+* reg : register address
+
+**returns :** 0 for success, negative value for error.
+
+#### `uint16_t I2Cread16(uint8_t addr, uint8_t reg)` ####
+Read a 16 bit register of an I2C slave.
+
+* addr : slave address
+* reg : register address
+
+**returns :** register value
+
+#### `int I2Cwrite16(uint8_t addr, uint8_t reg, uint16_t value)` ####
+Write a 16 bit register of an I2C slave.
+
+* addr : slave address
+* reg : register address
+
+**returns :** 0 for success, negative value for error.
+
+#### `uint32_t I2Cread32(uint8_t addr, uint8_t reg)` ####
+Read a 32 bit register of an I2C slave. As wiringPi doesn't support 32 bits
+access, the function actually issues two 16 bits reads at addr then addr + 2.
+
+* addr : slave address
+* reg : register address
+
+**returns :** register value
+
+#### `int I2Cwrite32(uint8_t addr, uint8_t reg, uint32_t value)` ####
+Write a 8 bit register of an I2C slave. As wiringPi doesn't support 32 bits
+access, the function actually issues two 16 bits writes at addr then addr + 2.
+
+* addr : slave address
+* reg : register address
+
+**returns :** 0 for success, negative value for error.

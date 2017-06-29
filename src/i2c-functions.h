@@ -17,13 +17,13 @@ extern "C" {
 
 int i2c_init(uint8_t addr);
 
-int8_t I2Cread8(uint8_t addr, uint8_t reg);
+uint8_t I2Cread8(uint8_t addr, uint8_t reg);
 int I2Cwrite8(uint8_t addr, uint8_t reg, uint8_t value);
 
 uint16_t I2Cread16(uint8_t addr, uint8_t reg);
 int I2Cwrite16(uint8_t addr, uint8_t reg, uint16_t value);
 
-// actually issues two read/write of 16 bits 
+// actually issues two read/write of 16 bits
 uint32_t I2Cread32(uint8_t addr, uint8_t reg);
 int I2Cwrite32(uint8_t addr, uint8_t reg, uint32_t value);
 

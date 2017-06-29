@@ -4,6 +4,7 @@
 #include <wiringPiI2C.h>
 #include <sys/ioctl.h>
 #include <stdio.h>
+#include <pthread.h>
 
 #define I2C_SLAVE	0x0703
 

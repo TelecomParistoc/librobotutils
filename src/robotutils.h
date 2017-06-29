@@ -3,5 +3,5 @@
  * allowing the programmer to include only this file
  */
 
-#include <robotutils/motordriver.h>
-#include <robotutils/motion.h>
+#include <robotutils/timing.h>
+#include <robotutils/i2c-functions.h>

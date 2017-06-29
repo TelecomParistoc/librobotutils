@@ -32,8 +32,8 @@ build/$(TARGET): $(OBJECTS)
 tests: LDFLAGS=-lrobotutils
 tests: $(TESTS)
 
-tests/%: tests/%.o $(OBJECTS)
-	$(CC) $(LDFLAGS_EXE) $^ -o $@
+tests/%: tests/%.o
+	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@
 
 clean:
 	rm -f build/*.o build/*.so build/*.d

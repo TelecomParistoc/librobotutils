@@ -5,6 +5,7 @@
 #include <sys/ioctl.h>
 #include <stdio.h>
 #include <pthread.h>
+#include <string.h> 		//for memcpy
 
 #define I2C_SLAVE	0x0703
 
@@ -63,7 +64,9 @@ uint32_t I2Cread32(uint8_t addr, uint8_t reg) {
 
 float I2CreadFloat(uint8_t addr, uint8_t reg) {
 	uint32_t result_as_int = I2Cread32(addr, reg);
-	return *((float*) (&result_as_int));
+	float result;
+	memcpy(&result, &result_as_int, sizeof(result_as_int));
+	return result;
 }
 
 static void releaseI2Clock() {

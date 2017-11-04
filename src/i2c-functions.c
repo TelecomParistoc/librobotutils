@@ -108,3 +108,9 @@ int I2Cwrite32(uint8_t addr, uint8_t reg, uint32_t value) {
 	I2Cwrite16(addr, reg, value);
 	return I2Cwrite16(addr, reg + 2, value >> 16);
 }
+
+int I2CwriteFloat(uint8_t addr, uint8_t reg, float value){
+	uint32_t to_send;
+	memcpy(&to_send, &value, sizeof(value));
+	return I2Cwrite32(addr, reg, to_send);
+}

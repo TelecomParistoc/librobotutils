@@ -27,8 +27,9 @@ int I2Cwrite16(uint8_t addr, uint8_t reg, uint16_t value);
 uint32_t I2Cread32(uint8_t addr, uint8_t reg);
 int I2Cwrite32(uint8_t addr, uint8_t reg, uint32_t value);
 
-//actually reads a int32 and interprets the data as a float */ 
+//actually reads a int32 and interprets the data as a float */
 float I2CreadFloat(uint8_t addr, uint8_t reg);
+int I2CwriteFloat(uint8_t addr, uint8_t reg, float x);
 
 #ifdef __cplusplus
 }

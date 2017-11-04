@@ -61,6 +61,11 @@ uint32_t I2Cread32(uint8_t addr, uint8_t reg) {
 	return result;
 }
 
+float I2CreadFloat(uint8_t addr, uint8_t reg) {
+	uint32_t result_as_int = I2Cread32(addr, reg);
+	return *((float*) (&result_as_int));
+}
+
 static void releaseI2Clock() {
 	pthread_mutex_unlock(&I2Clock);
 }

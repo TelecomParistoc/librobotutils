@@ -115,3 +115,69 @@ access, the function actually issues two 16 bits writes at addr then addr + 2.
 * reg : register address
 
 **returns :** 0 for success, negative value for error.
+
+#### `float I2CreadFloat(uint8_t addr, uint8_t reg)` ####
+Read a 32-bit float register of an I2C Slace. Actually, it uses I2CRead32 and interprets the result as float
+
+* addr : slave address
+* reg : register address
+
+**returns :** register value
+
+#### `int I2CwriteFloat(uint8_t addr, uint8_t reg, float x)` ####
+Write a 32-bit float register of an I2C slave. This work is done by converting the float to an uint32 and by using I2CWrite32.
+
+* addr : slave address
+* reg : register address
+* x : the value to write
+
+**returns :** 0 for success, negative value for error.
+
+### Receiving/sending float on I2C slave ###
+This is a basic example :
+```
+
+/************* USEFUL FUNCTIONS ************/
+
+/* casts a float to an int32_t which has exactly the same binary representation */
+static int32_t float_to_int32(float x){
+  int32_t result;
+  memcpy(&result, &x, sizeof(result));
+  return result;
+}
+
+/* casts an int32_t to a float which has exactly the same binary representation */
+static float int32_to_float(int32_t x){
+  float result;
+  memcpy(&result, &x, sizeof(result));
+  return result;
+}
+
+/************* RX PART ************/
+/* the float cur_pos.x will be read from I2C data*/
+switch (addr) {
+  ...
+case CUR_POS_X_LOW_ADDR:
+    tmp_cur_x = (rx_buffer[2] << 8) | rx_buffer[1];
+    break;
+case CUR_POS_X_HIGH_ADDR:
+    tmp_cur_x |= (rx_buffer[2] << 24) | (rx_buffer[1] << 16);
+    cur_pos.x = int32_to_float(tmp_cur_x);
+    break;
+}
+
+
+/*************** TX PART **************/
+/*the float cur_pos.x will be sent on I2C bus */
+switch (addr) {
+  ...
+case CUR_POS_X_LOW_ADDR:
+    saved_cur_x = float_to_int32(cur_pos.x);
+    *value = saved_cur_x & 0x0000FFFFU;
+    break;
+case CUR_POS_X_HIGH_ADDR:
+    *value = (saved_cur_x & 0xFFFF0000U) >> 16U;
+    break;
+}
+/*then *value is sent on I2C*/
+```  
